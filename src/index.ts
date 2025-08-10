@@ -22,10 +22,10 @@ const toast = document.getElementById('toast') as HTMLDivElement;
  * It clears the list first and then rebuilds it from the `todos` array.
  */
 function renderTodos(): void {
-    // Guard clause: If the list element doesn't exist, stop.
+    
     if (!todoList) return;
     
-    todoList.innerHTML = ''; // Clear the list to prevent duplicates
+    todoList.innerHTML = ''; 
 
     todos.forEach((todo, index) => {
         const li = document.createElement('li');
@@ -44,28 +44,23 @@ function renderTodos(): void {
     });
 }
 
-/**
- * Adds a new todo item to the `todos` array based on the input field's value.
- */
+
 function addTodo(): void {
-    // Guard clause: If the input element doesn't exist, stop.
+    
     if (!todoInput) return;
 
     const newTodoText = todoInput.value.trim();
     if (newTodoText !== '') {
         todos.push({ text: newTodoText, done: false });
-        todoInput.value = ''; // Clear the input field
+        todoInput.value = ''; 
         renderTodos();
     }
 }
 
-/**
- * Toggles the 'done' status of a todo item at a specific index.
- * @param index The array index of the todo to modify.
- */
+
 function toggleDone(index: number): void {
     const todo = todos[index];
-    // Guard clause: If the todo at the index doesn't exist, stop.
+   
     if (todo) {
         todo.done = !todo.done;
         if (todo.done) {
@@ -75,12 +70,9 @@ function toggleDone(index: number): void {
     }
 }
 
-/**
- * Displays a toast notification for a short period.
- * @param message The text to display in the toast.
- */
+
 function showToast(message: string): void {
-    // Guard clause: If the toast element doesn't exist, stop.
+   
     if (!toast) return;
 
     toast.textContent = message;
@@ -91,9 +83,7 @@ function showToast(message: string): void {
     }, 2000);
 }
 
-// 4. ATTACH EVENT LISTENERS AND RUN
-// This is the main entry point. We check if all essential elements were found.
-// If they were, we attach the event listeners and perform the initial render.
+
 if (todoInput && addTodoBtn && todoList) {
     addTodoBtn.addEventListener('click', addTodo);
     todoInput.addEventListener('keypress', (event: KeyboardEvent) => {
@@ -102,9 +92,9 @@ if (todoInput && addTodoBtn && todoList) {
         }
     });
 
-    // Perform the first render to show the initial (empty) state.
+
     renderTodos();
 } else {
-    // If an element is missing, log an error to the console for debugging.
+
     console.error("Initialization failed: Could not find one or more required HTML elements.");
 }
